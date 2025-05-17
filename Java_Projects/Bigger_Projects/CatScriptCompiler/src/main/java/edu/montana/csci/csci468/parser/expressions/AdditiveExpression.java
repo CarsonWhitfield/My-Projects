@@ -1,0 +1,136 @@
+package edu.montana.csci.csci468.parser.expressions;
+
+import edu.montana.csci.csci468.bytecode.ByteCodeGenerator;
+import edu.montana.csci.csci468.eval.CatscriptRuntime;
+import edu.montana.csci.csci468.parser.*;
+import edu.montana.csci.csci468.tokenizer.Token;
+import edu.montana.csci.csci468.tokenizer.TokenType;
+import org.objectweb.asm.Opcodes;
+
+public class AdditiveExpression extends Expression {
+
+    private final Token operator;
+    private final Expression leftHandSide;
+    private final Expression rightHandSide;
+
+    public AdditiveExpression(Token operator, Expression leftHandSide, Expression rightHandSide) {
+        this.leftHandSide = addChild(leftHandSide);
+        this.rightHandSide = addChild(rightHandSide);
+        this.operator = operator;
+    }
+
+    public Expression getLeftHandSide() {
+        return leftHandSide;
+    }
+    public Expression getRightHandSide() {
+        return rightHandSide;
+    }
+    public boolean isAdd() {
+        return operator.getType() == TokenType.PLUS;
+    }
+
+    @Override
+    public void validate(SymbolTable symbolTable) {
+        leftHandSide.validate(symbolTable);
+        rightHandSide.validate(symbolTable);
+        if (getType().equals(CatscriptType.INT)) {
+            if (!leftHandSide.getType().equals(CatscriptType.INT)) {
+                leftHandSide.addError(ErrorType.INCOMPATIBLE_TYPES);
+            }
+            if (!rightHandSide.getType().equals(CatscriptType.INT)) {
+                rightHandSide.addError(ErrorType.INCOMPATIBLE_TYPES);
+            }
+        }
+        // TODO handle strings
+        CatscriptType lhsType = leftHandSide.getType();
+        CatscriptType rhsType = rightHandSide.getType();
+
+        if (lhsType.equals(CatscriptType.INT) && rhsType.equals(CatscriptType.INT)) {
+            return; // Valid integer operation
+        }
+        if (lhsType.equals(CatscriptType.STRING) || rhsType.equals(CatscriptType.STRING)) {
+            return; // Valid string concatenation
+        }
+    }
+
+    @Override
+    public CatscriptType getType() {
+        if (leftHandSide.getType().equals(CatscriptType.STRING) || rightHandSide.getType().equals(CatscriptType.STRING)) {
+            return CatscriptType.STRING;
+        } else {
+            return CatscriptType.INT;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "[" + operator.getStringValue() + "]";
+    }
+
+    //==============================================================
+    // Implementation
+    //==============================================================
+
+    @Override
+    public Object evaluate(CatscriptRuntime runtime) {
+        Object lhsValue = leftHandSide.evaluate(runtime);
+        Object rhsValue = rightHandSide.evaluate(runtime);
+        if(getType().equals(CatscriptType.INT)){
+
+            //TODO handle string case
+
+            if (isAdd()) {
+                return (Integer)lhsValue + (Integer)rhsValue;
+            } else {
+                return (Integer)lhsValue - (Integer)rhsValue;
+            }
+        } else{
+            if(lhsValue == null){
+                lhsValue = "null";
+            }
+
+            if(rhsValue == null){
+                rhsValue = "null";
+            }
+            return (lhsValue.toString() + rhsValue.toString());
+        }
+
+    }
+
+    @Override
+    public void transpile(StringBuilder javascript) {
+        getLeftHandSide().transpile(javascript);
+        javascript.append(operator.getStringValue());
+        getRightHandSide().transpile(javascript);
+    }
+
+    @Override
+    public void compile(ByteCodeGenerator code) {
+        if (isAdd()) {
+            if((leftHandSide.getType() == CatscriptType.INT) && (rightHandSide.getType() == CatscriptType.INT)) {
+                getLeftHandSide().compile(code);
+                getRightHandSide().compile(code);
+                code.addInstruction(Opcodes.IADD);
+            }
+            else {
+                getLeftHandSide().compile(code);
+                box(code, getLeftHandSide().getType());
+                code.addMethodInstruction(Opcodes.INVOKESTATIC, ByteCodeGenerator.internalNameFor(String.class), "valueOf",
+                        "(Ljava/lang/Object;)Ljava/lang/String;");
+
+                getRightHandSide().compile(code);
+                box(code, getRightHandSide().getType());
+                code.addMethodInstruction(Opcodes.INVOKESTATIC, ByteCodeGenerator.internalNameFor(String.class), "valueOf",
+                        "(Ljava/lang/Object;)Ljava/lang/String;");
+
+                code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, ByteCodeGenerator.internalNameFor(String.class), "concat",
+                        "(Ljava/lang/String;)Ljava/lang/String;");
+            }
+        } else{
+            getLeftHandSide().compile(code);
+            getRightHandSide().compile(code);
+            code.addInstruction(Opcodes.ISUB);
+        }
+    }
+
+}

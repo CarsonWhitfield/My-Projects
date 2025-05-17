@@ -1,0 +1,446 @@
+Running main() from /home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/lib/googletest/src/gtest_main.cc
+[==========] Running 90 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from instruction_construction
+[ RUN      ] instruction_construction.multiplication_works_in_firth
+Tokenized: (null)
+Checking if more tokens: 2
+Matching token: + with 2
+Matching token: - with 2
+Matching token: * with 2
+Matching token: get with 2
+Matching token: dup with 2
+Matching token: pop with 2
+Matching token: swap with 2
+Matching token: return with 2
+Matching token: . with 2
+Parsing number: 2
+Taking token: 2
+Adding element: 2
+Checking if more tokens: 3
+Matching token: + with 3
+Matching token: - with 3
+Matching token: * with 3
+Matching token: get with 3
+Matching token: dup with 3
+Matching token: pop with 3
+Matching token: swap with 3
+Matching token: return with 3
+Matching token: . with 3
+Parsing number: 3
+Taking token: 3
+Adding element: 3
+Checking if more tokens: *
+Matching token: + with *
+Matching token: - with *
+Matching token: * with *
+Parsing operation: *
+Taking token: *
+Adding element: *
+Checking if more tokens: pop
+Matching token: + with pop
+Matching token: - with pop
+Matching token: * with pop
+Matching token: get with pop
+Matching token: dup with pop
+Matching token: pop with pop
+Parsing operation: pop
+Taking token: pop
+Adding element: pop
+Checking if more tokens: None
+Generating code for element: 2
+Instruction detected: 2, Type: 2
+Generating code for element: 3
+Instruction detected: 3, Type: 2
+Generating code for element: *
+Instruction detected: *, Type: SMUL
+Current assembly: LDI 2
+SPUSH
+LDI 3
+SPUSH
+SMUL
+
+Generating code for element: pop
+Starting parsing process...
+Processing token: LDI
+Label detected: LDI
+Instruction type: 2
+Error: Unknown instruction encountered: 2
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/firth.cpp:19: Failure
+Expected equality of these values:
+  the_machine->accumulator
+    Which is: 0
+  6
+[  FAILED  ] instruction_construction.multiplication_works_in_firth (0 ms)
+[ RUN      ] instruction_construction.max_works_in_firth
+Tokenized: (null)
+Checking if more tokens: 3
+Matching token: + with 3
+Matching token: - with 3
+Matching token: * with 3
+Matching token: get with 3
+Matching token: dup with 3
+Matching token: pop with 3
+Matching token: swap with 3
+Matching token: return with 3
+Matching token: . with 3
+Parsing number: 3
+Taking token: 3
+Adding element: 3
+Checking if more tokens: 2
+Matching token: + with 2
+Matching token: - with 2
+Matching token: * with 2
+Matching token: get with 2
+Matching token: dup with 2
+Matching token: pop with 2
+Matching token: swap with 2
+Matching token: return with 2
+Matching token: . with 2
+Parsing number: 2
+Taking token: 2
+Adding element: 2
+Checking if more tokens: max
+Matching token: + with max
+Matching token: - with max
+Matching token: * with max
+Matching token: get with max
+Matching token: dup with max
+Matching token: pop with max
+Matching token: swap with max
+Matching token: return with max
+Matching token: . with max
+Matching token: zero? with max
+Matching token: def with max
+Taking token: max
+Error: Unknown token
+Adding element: max
+Checking if more tokens: None
+Starting parsing process...
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/firth.cpp:31: Failure
+Expected equality of these values:
+  the_machine->accumulator
+    Which is: 0
+  3
+[  FAILED  ] instruction_construction.max_works_in_firth (0 ms)
+[ RUN      ] instruction_construction.make_instruction_basic_instruction_fields_are_set
+[       OK ] instruction_construction.make_instruction_basic_instruction_fields_are_set (0 ms)
+[ RUN      ] instruction_construction.make_instruction_spushi_takes_two_slots
+[       OK ] instruction_construction.make_instruction_spushi_takes_two_slots (0 ms)
+[ RUN      ] instruction_construction.make_instruction_call_takes_three_slots
+[       OK ] instruction_construction.make_instruction_call_takes_three_slots (0 ms)
+[ RUN      ] instruction_construction.make_instruction_properly_offsets_based_on_preceding_instruction
+[       OK ] instruction_construction.make_instruction_properly_offsets_based_on_preceding_instruction (0 ms)
+[----------] 6 tests from instruction_construction (0 ms total)
+
+[----------] 10 tests from parsing_tests
+[ RUN      ] parsing_tests.simple_instruction_parsing_works
+Starting parsing process...
+Processing token: OUT
+Instruction type: OUT
+Parsed instruction: OUT
+Instruction created: OUT, Label: None, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:59: Failure
+Expected equality of these values:
+  result->root->instruction
+    Which is: "\xF0yv\xE8\xAA\xAA"
+  "OUT"
+[  FAILED  ] parsing_tests.simple_instruction_parsing_works (0 ms)
+[ RUN      ] parsing_tests.two_instruction_parsing_works_w_space
+Starting parsing process...
+Processing token: INP
+Instruction type: INP
+Parsed instruction: INP
+Instruction created: INP, Label: None, Value: 0
+Processing token: OUT
+Instruction type: OUT
+Parsed instruction: OUT
+Instruction created: OUT, Label: None, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:69: Failure
+Expected equality of these values:
+  result->root->instruction
+    Which is: "0~v\xE8\xAA\xAA"
+    As Text: "0~v說"
+  "INP"
+[  FAILED  ] parsing_tests.two_instruction_parsing_works_w_space (0 ms)
+[ RUN      ] parsing_tests.two_instruction_parsing_works_w_newline
+Starting parsing process...
+Processing token: INP
+Instruction type: INP
+Parsed instruction: INP
+Instruction created: INP, Label: None, Value: 0
+Processing token: OUT
+Instruction type: OUT
+Parsed instruction: OUT
+Instruction created: OUT, Label: None, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:79: Failure
+Expected equality of these values:
+  result->root->instruction
+    Which is: "\x80\x88v\xE8\xAA\xAA"
+  "INP"
+[  FAILED  ] parsing_tests.two_instruction_parsing_works_w_newline (0 ms)
+[ RUN      ] parsing_tests.label_is_parsed_correctly
+Starting parsing process...
+Processing token: FOO
+Label detected: FOO
+Instruction type: OUT
+Parsed instruction: OUT
+Instruction created: OUT, Label: FOO, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:89: Failure
+Expected equality of these values:
+  result->root->label
+    Which is: "p\x92v\xE8\xAA\xAA"
+  "FOO"
+[  FAILED  ] parsing_tests.label_is_parsed_correctly (0 ms)
+[ RUN      ] parsing_tests.numeric_reference_works_for_branch
+Starting parsing process...
+Processing token: BRA
+Instruction type: BRA
+Parsed BRA instruction with label reference: None
+Instruction created: BRA, Label: None, Value: 22
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:100: Failure
+Expected equality of these values:
+  result->root->instruction
+    Which is: "\xA0\x99v\xE8\xAA\xAA"
+  "BRA"
+[  FAILED  ] parsing_tests.numeric_reference_works_for_branch (0 ms)
+[ RUN      ] parsing_tests.label_reference_works_for_branch
+Starting parsing process...
+Processing token: BRA
+Instruction type: BRA
+Parsed BRA instruction with label reference: FOO
+Instruction created: BRA, Label: None, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:111: Failure
+Expected equality of these values:
+  result->root->instruction
+    Which is: "\xA0\x99v\xE8\xAA\xAA"
+  "BRA"
+[  FAILED  ] parsing_tests.label_reference_works_for_branch (0 ms)
+[ RUN      ] parsing_tests.unknown_instruction_is_handled
+Starting parsing process...
+Processing token: FOO
+Label detected: FOO
+Instruction type: FOO
+Error: Unknown instruction encountered: FOO
+[       OK ] parsing_tests.unknown_instruction_is_handled (0 ms)
+[ RUN      ] parsing_tests.no_argument_for_instruction_causes_error
+Starting parsing process...
+Processing token: BRA
+Instruction type: BRA
+Error: Argument required for BRA instruction.
+[       OK ] parsing_tests.no_argument_for_instruction_causes_error (0 ms)
+[ RUN      ] parsing_tests.numbers_out_of_machine_range_cause_error
+Starting parsing process...
+Processing token: DAT
+Instruction type: DAT
+DAT instruction detected, no operation performed.
+Error: DAT instruction should not have arguments.
+[       OK ] parsing_tests.numbers_out_of_machine_range_cause_error (0 ms)
+[ RUN      ] parsing_tests.negative_numbers_out_of_machine_range_are_capped_properly
+Starting parsing process...
+Processing token: DAT
+Instruction type: DAT
+DAT instruction detected, no operation performed.
+Error: DAT instruction should not have arguments.
+[       OK ] parsing_tests.negative_numbers_out_of_machine_range_are_capped_properly (0 ms)
+[----------] 10 tests from parsing_tests (0 ms total)
+
+[----------] 30 tests from code_generation
+[ RUN      ] code_generation.add_instruction_generates_properly
+[       OK ] code_generation.add_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sub_instruction_generates_properly
+[       OK ] code_generation.sub_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.store_instruction_generates_properly
+[       OK ] code_generation.store_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.load_immediate_instruction_generates_properly
+[       OK ] code_generation.load_immediate_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.load_instruction_generates_properly
+[       OK ] code_generation.load_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.branch_instruction_generates_properly
+[       OK ] code_generation.branch_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.branch_if_zero_instruction_generates_properly
+[       OK ] code_generation.branch_if_zero_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.branch_if_positive_instruction_generates_properly
+[       OK ] code_generation.branch_if_positive_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.input_instruction_generates_properly
+[       OK ] code_generation.input_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.out_instruction_generates_properly
+[       OK ] code_generation.out_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.halt_instruction_generates_properly
+[       OK ] code_generation.halt_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.cob_instruction_generates_properly
+[       OK ] code_generation.cob_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.dat_instruction_generates_properly
+[       OK ] code_generation.dat_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.spush_instruction_generates_properly
+[       OK ] code_generation.spush_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.spop_instruction_generates_properly
+[       OK ] code_generation.spop_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sdup_instruction_generates_properly
+[       OK ] code_generation.sdup_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sdrop_instruction_generates_properly
+[       OK ] code_generation.sdrop_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sswap_instruction_generates_properly
+[       OK ] code_generation.sswap_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sadd_instruction_generates_properly
+[       OK ] code_generation.sadd_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.ssub_instruction_generates_properly
+[       OK ] code_generation.ssub_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.smax_instruction_generates_properly
+[       OK ] code_generation.smax_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.smin_instruction_generates_properly
+[       OK ] code_generation.smin_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.smul_instruction_generates_properly
+[       OK ] code_generation.smul_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.sdiv_instruction_generates_properly
+[       OK ] code_generation.sdiv_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.spushi_instruction_generates_properly
+[       OK ] code_generation.spushi_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.call_instruction_generates_properly
+[       OK ] code_generation.call_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.ret_instruction_generates_properly
+[       OK ] code_generation.ret_instruction_generates_properly (0 ms)
+[ RUN      ] code_generation.instructions_next_to_one_another_generate_in_order_properly
+[       OK ] code_generation.instructions_next_to_one_another_generate_in_order_properly (0 ms)
+[ RUN      ] code_generation.labels_resolve_at_code_generation_time
+[       OK ] code_generation.labels_resolve_at_code_generation_time (0 ms)
+[ RUN      ] code_generation.bad_label_causes_error
+[       OK ] code_generation.bad_label_causes_error (0 ms)
+[----------] 30 tests from code_generation (0 ms total)
+
+[----------] 1 test from end_to_end
+[ RUN      ] end_to_end.bootstrap
+Starting parsing process...
+Processing token: INP
+Instruction type: INP
+Parsed instruction: INP
+Instruction created: INP, Label: None, Value: 0
+Processing token: OUT
+Instruction type: OUT
+Parsed instruction: OUT
+Instruction created: OUT, Label: None, Value: 0
+Parsing completed successfully.
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:535: Failure
+Expected equality of these values:
+  result->code[0]
+    Which is: 0
+  901
+/home/parallels/autograder/csci-366-fall2024/grading/scripts/repos/whitfield_carson/lmsm/test/assembler.cpp:536: Failure
+Expected equality of these values:
+  result->code[1]
+    Which is: 0
+  902
+[  FAILED  ] end_to_end.bootstrap (0 ms)
+[----------] 1 test from end_to_end (0 ms total)
+
+[----------] 43 tests from lmsm_machine_suite
+[ RUN      ] lmsm_machine_suite.test_add_instruction_works
+[       OK ] lmsm_machine_suite.test_add_instruction_works (0 ms)
+[ RUN      ] lmsm_machine_suite.test_add_instruction_properly_caps_values
+[       OK ] lmsm_machine_suite.test_add_instruction_properly_caps_values (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sub_instruction_works
+[       OK ] lmsm_machine_suite.test_sub_instruction_works (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sub_instruction_properly_caps_values
+[       OK ] lmsm_machine_suite.test_sub_instruction_properly_caps_values (0 ms)
+[ RUN      ] lmsm_machine_suite.test_store_instruction_works
+[       OK ] lmsm_machine_suite.test_store_instruction_works (0 ms)
+[ RUN      ] lmsm_machine_suite.test_load_instruction_works
+[       OK ] lmsm_machine_suite.test_load_instruction_works (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_instruction_works
+[       OK ] lmsm_machine_suite.test_branch_instruction_works (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_if_zero_instruction_works_when_val_zero
+[       OK ] lmsm_machine_suite.test_branch_if_zero_instruction_works_when_val_zero (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_if_zero_instruction_works_when_val_not_zero
+[       OK ] lmsm_machine_suite.test_branch_if_zero_instruction_works_when_val_not_zero (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_zero
+[       OK ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_zero (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_positive
+[       OK ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_positive (0 ms)
+[ RUN      ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_not_positive
+[       OK ] lmsm_machine_suite.test_branch_if_positive_instruction_works_when_val_not_positive (0 ms)
+[ RUN      ] lmsm_machine_suite.test_output_instruction
+[       OK ] lmsm_machine_suite.test_output_instruction (0 ms)
+[ RUN      ] lmsm_machine_suite.test_halt_instruction
+[       OK ] lmsm_machine_suite.test_halt_instruction (0 ms)
+[ RUN      ] lmsm_machine_suite.test_load_immediate_instruction
+[       OK ] lmsm_machine_suite.test_load_immediate_instruction (0 ms)
+[ RUN      ] lmsm_machine_suite.test_push_instruction
+[       OK ] lmsm_machine_suite.test_push_instruction (0 ms)
+[ RUN      ] lmsm_machine_suite.test_pop_instruction_removes_top_of_stack
+[       OK ] lmsm_machine_suite.test_pop_instruction_removes_top_of_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_pop_instruction_enters_error_state_if_nothing_to_pop
+[       OK ] lmsm_machine_suite.test_pop_instruction_enters_error_state_if_nothing_to_pop (0 ms)
+[ RUN      ] lmsm_machine_suite.test_dup_instruction_duplicates_top_of_stack
+[       OK ] lmsm_machine_suite.test_dup_instruction_duplicates_top_of_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_drop_instruction_removes_top_of_stack
+[       OK ] lmsm_machine_suite.test_drop_instruction_removes_top_of_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_drop_instruction_enters_error_state_if_nothing_to_pop
+[       OK ] lmsm_machine_suite.test_drop_instruction_enters_error_state_if_nothing_to_pop (0 ms)
+[ RUN      ] lmsm_machine_suite.test_swap_instruction_swaps_top_of_stack
+[       OK ] lmsm_machine_suite.test_swap_instruction_swaps_top_of_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_swap_instruction_enters_error_state_if_nothing_to_swap
+[       OK ] lmsm_machine_suite.test_swap_instruction_enters_error_state_if_nothing_to_swap (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sadd_instruction_adds_the_values_on_the_stack
+[       OK ] lmsm_machine_suite.test_sadd_instruction_adds_the_values_on_the_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sadd_instruction_properly_caps_values
+[       OK ] lmsm_machine_suite.test_sadd_instruction_properly_caps_values (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sadd_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_sadd_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_ssub_instruction_subtracts_the_values_on_the_stack
+[       OK ] lmsm_machine_suite.test_ssub_instruction_subtracts_the_values_on_the_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_ssub_instruction_properly_caps_values
+[       OK ] lmsm_machine_suite.test_ssub_instruction_properly_caps_values (0 ms)
+[ RUN      ] lmsm_machine_suite.test_ssub_instruction_subtracts_the_values_on_the_stack_in_the_right_order
+[       OK ] lmsm_machine_suite.test_ssub_instruction_subtracts_the_values_on_the_stack_in_the_right_order (0 ms)
+[ RUN      ] lmsm_machine_suite.test_ssub_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_ssub_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smax_instruction_sets_max_val_on_stack
+[       OK ] lmsm_machine_suite.test_smax_instruction_sets_max_val_on_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smax_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_smax_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smin_instruction_sets_min_val_on_stack
+[       OK ] lmsm_machine_suite.test_smin_instruction_sets_min_val_on_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smin_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_smin_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smul_instruction_multiplies_the_values_on_the_stack
+[       OK ] lmsm_machine_suite.test_smul_instruction_multiplies_the_values_on_the_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smul_instruction_properly_caps_values
+[       OK ] lmsm_machine_suite.test_smul_instruction_properly_caps_values (0 ms)
+[ RUN      ] lmsm_machine_suite.test_smul_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_smul_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sdiv_instruction_divides_the_values_on_the_stack
+[       OK ] lmsm_machine_suite.test_sdiv_instruction_divides_the_values_on_the_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.test_sdiv_instruction_enters_error_state_if_not_enough_elts
+[       OK ] lmsm_machine_suite.test_sdiv_instruction_enters_error_state_if_not_enough_elts (0 ms)
+[ RUN      ] lmsm_machine_suite.test_call_instruction_jumps_to_correct_location_and_consumes_top_of_stack
+[       OK ] lmsm_machine_suite.test_call_instruction_jumps_to_correct_location_and_consumes_top_of_stack (0 ms)
+[ RUN      ] lmsm_machine_suite.return_set_program_counter_to_return_address_and_restores_return_address
+[       OK ] lmsm_machine_suite.return_set_program_counter_to_return_address_and_restores_return_address (0 ms)
+[ RUN      ] lmsm_machine_suite.step_steps_to_the_next_instruction_and_executes_current
+[       OK ] lmsm_machine_suite.step_steps_to_the_next_instruction_and_executes_current (0 ms)
+[ RUN      ] lmsm_machine_suite.step_does_not_step_to_the_next_instruction_and_execute_if_machine_is_halted
+[       OK ] lmsm_machine_suite.step_does_not_step_to_the_next_instruction_and_execute_if_machine_is_halted (0 ms)
+[----------] 43 tests from lmsm_machine_suite (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 90 tests from 5 test suites ran. (0 ms total)
+[  PASSED  ] 81 tests.
+[  FAILED  ] 9 tests, listed below:
+[  FAILED  ] instruction_construction.multiplication_works_in_firth
+[  FAILED  ] instruction_construction.max_works_in_firth
+[  FAILED  ] parsing_tests.simple_instruction_parsing_works
+[  FAILED  ] parsing_tests.two_instruction_parsing_works_w_space
+[  FAILED  ] parsing_tests.two_instruction_parsing_works_w_newline
+[  FAILED  ] parsing_tests.label_is_parsed_correctly
+[  FAILED  ] parsing_tests.numeric_reference_works_for_branch
+[  FAILED  ] parsing_tests.label_reference_works_for_branch
+[  FAILED  ] end_to_end.bootstrap
+
+ 9 FAILED TESTS

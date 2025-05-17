@@ -1,0 +1,154 @@
+package edu.montana.csci.csci440.controller;
+
+import edu.montana.csci.csci440.helpers.EmployeeHelper;
+import edu.montana.csci.csci440.model.Employee;
+import edu.montana.csci.csci440.util.Web;
+
+import java.util.List;
+
+import static spark.Spark.get;
+import static spark.Spark.post;
+
+public class EmployeesController extends BaseController {
+    public static void init(){
+        /* CREATE */
+        get("/employees/new", (req, resp) -> {
+            Employee employee = new Employee();
+            return renderTemplate("templates/employees/new.vm", "employee", employee);
+        });
+
+        post("/employees/new", (req, resp) -> {
+            Employee emp = new Employee();
+            // Extract parameters from the request
+            String firstName = req.queryParams("FirstName");
+            String lastName = req.queryParams("LastName");
+            String email = req.queryParams("Email");
+            String reportsToParam = req.queryParams("ReportsTo");
+
+            // Populate the employee fields from request parameters
+            emp.setFirstName(firstName);
+            emp.setLastName(lastName);
+            emp.setEmail(email);
+
+            // Set ReportsTo with validation (if it exists)
+            if (reportsToParam != null && !reportsToParam.isEmpty()) {
+                try {
+                    emp.setReportsTo(Long.valueOf(reportsToParam));
+                } catch (NumberFormatException e) {
+                    Web.showErrorMessage("Invalid ReportsTo Employee ID!");
+                    return renderTemplate("templates/employees/new.vm", "employee", emp);
+                }
+            }
+
+
+            if (emp.create()) {
+                Web.showMessage("Created An Employee!");
+                return Web.redirect("/employees/" + emp.getEmployeeId());
+            } else {
+                Web.showErrorMessage("Could Not Create An Employee!");
+                return renderTemplate("templates/employees/new.vm",
+                        "employee", emp);
+            }
+        });
+
+        /* READ */
+        get("/employees", (req, resp) -> {
+            List<Employee> employees = Employee.all(1, Web.PAGE_SIZE);
+            return renderTemplate("templates/employees/index.vm",
+                    "employees", employees);
+        });
+
+        get("/employees/tree", (request, response) -> {
+            String employeeTree = EmployeeHelper.makeEmployeeTree();
+            return renderTemplate("templates/employees/tree.vm",
+                    "employeeTree", employeeTree);
+        });
+
+        get("/employees/sales", (request, response) -> {
+            List<Employee.SalesSummary> salesInfo = Employee.getSalesSummaries();
+            return renderTemplate("templates/employees/sales.vm",
+                    "salesInfo", salesInfo);
+        });
+
+        get("/employees/:id", (req, resp) -> {
+            Employee employee = Employee.find(asInt(req.params(":id")));
+            return renderTemplate("templates/employees/show.vm",
+                    "employee", employee);
+        });
+
+        /* UPDATE */
+        get("/employees/:id/edit", (req, resp) -> {
+            Employee employee = Employee.find(asInt(req.params(":id")));
+            return renderTemplate("templates/employees/edit.vm",
+                    "employee", employee);
+        });
+
+        post("/employees/:id", (req, resp) -> {
+            Employee emp = Employee.find(asInt(req.params(":id")));
+
+            if (emp != null) {
+                // Extract parameters from the request
+                String firstName = req.queryParams("FirstName");
+                String lastName = req.queryParams("LastName");
+                String email = req.queryParams("Email");
+                String reportsToParam = req.queryParams("ReportsTo");
+
+                // Populate the employee fields from request parameters
+                emp.setFirstName(firstName);
+                emp.setLastName(lastName);
+                emp.setEmail(email);
+
+                // Set ReportsTo with validation (if it exists)
+                if (reportsToParam != null && !reportsToParam.isEmpty()) {
+                    try {
+                        emp.setReportsTo(Long.valueOf(reportsToParam));
+                    } catch (NumberFormatException e) {
+                        Web.showErrorMessage("Invalid ReportsTo Employee ID!");
+                        return renderTemplate("templates/employees/edit.vm", "employee", emp);
+                    }
+                }
+            }
+
+
+            if (emp != null) {
+                // Extract parameters from the request
+                String firstName = req.queryParams("FirstName");
+                String lastName = req.queryParams("LastName");
+                String email = req.queryParams("Email");
+                String reportsToParam = req.queryParams("ReportsTo");
+
+                // Populate the employee fields from request parameters
+                emp.setFirstName(firstName);
+                emp.setLastName(lastName);
+                emp.setEmail(email);
+
+                // Validate ReportsTo (can be null or a valid EmployeeId)
+                if (reportsToParam != null && !reportsToParam.isEmpty()) {
+                    try {
+                        emp.setReportsTo(Long.valueOf(reportsToParam));
+                    } catch (NumberFormatException e) {
+                        Web.showErrorMessage("Invalid ReportsTo Employee ID!");
+                        return renderTemplate("templates/employees/edit.vm", "employee", emp);
+                    }
+                }
+            }
+
+
+                if (emp.update()) {
+                Web.showMessage("Updated Employee!");
+                return Web.redirect("/employees/" + emp.getEmployeeId());
+            } else {
+                Web.showErrorMessage("Could Not Update Employee!");
+                return renderTemplate("templates/employees/edit.vm", "employee", emp);
+            }
+        });
+
+        /* DELETE */
+        get("/employees/:id/delete", (req, resp) -> {
+            Employee employee = Employee.find(asInt(req.params(":id")));
+            employee.delete();
+            Web.showMessage("Deleted Employee " + employee.getEmail());
+            return Web.redirect("/employees");
+        });
+    }
+}
