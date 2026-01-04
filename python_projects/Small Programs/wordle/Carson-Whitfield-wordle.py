@@ -1,11 +1,5 @@
 import random
 
-# -------------------------------------------------
-# CSCI 127, Program 5: WORDLE
-# Month 04, 2023
-# Carson Whitfield
-# -------------------------------------------------
-
 class Wordle:
 
     def __init__(self, letters_in_word, file_of_words):
