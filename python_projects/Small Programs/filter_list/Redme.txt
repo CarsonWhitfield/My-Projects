@@ -1,0 +1,35 @@
+🔢 Integer Range Filter (Python)
+
+This Python program allows users to filter a list of integers based on a specified numeric range. It takes user input, sorts the values, and returns only the integers that fall within a given lower and upper bound (inclusive).
+
+🔹 What It Does
+
+Prompts the user to enter a list of integers separated by spaces
+
+Asks for a lower and upper bound
+
+Sorts the input integers in ascending order
+
+Filters the list to include only values within the specified range
+
+Displays both the sorted list and the filtered result
+
+🔹 Key Function
+
+filter_int_list(user_lo, user_hi, user_list)
+
+Iterates through the list of integers
+
+Keeps values where user_lo ≤ value ≤ user_hi
+
+Returns a new list containing only valid integers
+
+🔹 Concepts Demonstrated
+
+User input processing and validation
+
+List manipulation and sorting
+
+Conditional filtering
+
+Function design and reuse
