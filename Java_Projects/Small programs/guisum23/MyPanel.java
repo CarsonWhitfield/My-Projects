@@ -21,7 +21,7 @@ import java.awt.event.ComponentListener;
 
 /**
  *
- * @author Hunter
+ * @author cwhit
  */
 public class MyPanel extends JPanel implements MouseListener,MouseMotionListener{
 
