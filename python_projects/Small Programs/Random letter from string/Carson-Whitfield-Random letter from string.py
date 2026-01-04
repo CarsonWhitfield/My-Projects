@@ -1,12 +1,3 @@
-# -----------------------------------------+
-# Your name                                |
-# CSCI 127, Lab 4                          |
-# Last Updated: (mm/dd/yyyy)               |
-# Name: Carson Whitfield                   |
-# -----------------------------------------|
-# Random letter from string                |
-# -----------------------------------------+
-
 
 import random
 import string
