@@ -1,13 +1,4 @@
-# --------------------------------------
-# CSCI 127, Lab 8                      |
-# 2023/23/03                           |
-# Carson Whitfield                     |
-# --------------------------------------
 
-# The missing functions go here.
-
-# Below are some hints for the first one to get you started.
-# Familiarize yourself with the csv file by opening it in an editor first...
 
 def create_dictionary(file): # call for the file
     file = open(file, 'r') # open the file
