@@ -1,12 +1,3 @@
-# -----------------------------------------+
-# Carson Whitfield                         | 
-# CSCI 127, Lab 6                          |
-# Last Updated: (mm/dd/yyyy)               |
-# Name:                                    |
-# -----------------------------------------|
-# Get states in a population range         |
-# -----------------------------------------+
-
 
 def get_list_from_file(census_data):
     
